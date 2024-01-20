@@ -22,6 +22,15 @@ public class EnemySpawner : ObjectPool<Enemy>
             StopCoroutine(_spawnEnemiesCoroutine);
     }
 
+    public override void Restart()
+    {
+        foreach (var item in Pool)
+        {
+            item.Restart();
+            item.gameObject.SetActive(false);
+        }
+    }
+
     private IEnumerator SpawnEnemies()
     {
         var waitForDelay = new WaitForSeconds(_delay);
@@ -41,14 +50,5 @@ public class EnemySpawner : ObjectPool<Enemy>
         var enemy = GetObject(_prefabs);
         enemy.transform.position = spawnPoint;
         enemy.gameObject.SetActive(true);
-    }
-
-    public override void Restart()
-    {
-        foreach (var item in Pool)
-        {
-            item.Restart();
-            item.gameObject.SetActive(false);
-        }
     }
 }

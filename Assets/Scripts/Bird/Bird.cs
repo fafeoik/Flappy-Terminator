@@ -31,14 +31,14 @@ public class Bird : MonoBehaviour
         _birdCollisionHandler.CollisionDetected -= ProcessCollision;
     }
 
-    private void ProcessCollision()
-    {
-         GameOver?.Invoke();
-    }
-
     public void Reset()
     {
         _scoreCounter.Reset();
         _birdMover.Reset();
+    }
+
+    private void ProcessCollision()
+    {
+         GameOver?.Invoke();
     }
 }

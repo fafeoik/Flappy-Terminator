@@ -18,6 +18,15 @@ public class BirdShooter : ObjectPool<BirdBullet>
         }
     }
 
+    public override void Restart()
+    {
+        foreach (var item in Pool)
+        {
+            item.Restart();
+            item.gameObject.SetActive(false);
+        }
+    }
+
     private void Shoot()
     {
         var bullet = GetObject(_prefab);
@@ -30,14 +39,5 @@ public class BirdShooter : ObjectPool<BirdBullet>
     private void EnemyHit()
     {
         EnemyKilled?.Invoke();
-    }
-
-    public override void Restart()
-    {
-        foreach (var item in Pool)
-        {
-            item.Restart();
-            item.gameObject.SetActive(false);
-        }
     }
 }
